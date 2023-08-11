@@ -3,3 +3,6 @@ class InputNotFound(Exception):
 
 class OptionNotFound(Exception):
     pass
+
+class MutuallyExclusiveOptions(Exception):
+    pass

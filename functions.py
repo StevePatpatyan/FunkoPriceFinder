@@ -45,3 +45,37 @@ def filter_max(data):
     new_data["images"] = [img for img in new_data["images"] if new_data["prices"][new_data["images"].index(img)] == max(new_data["prices"])]
     new_data["prices"] = [str(price) + " (max)" for price in new_data["prices"] if price == max(new_data["prices"])]
     return new_data
+
+def sort_lowest(data):
+    data["prices"] = [price if type(price) == int else 9999999999999999999 for price in data["prices"]]
+    for x in range(len(data["prices"])):
+        min_index = data["prices"].index(min(data["prices"][x:]))
+        print(min_index)
+        temp = data["prices"][min_index]
+        data["prices"][min_index] = data["prices"][x]
+        data["prices"][x] = temp
+        temp = data["names"][min_index]
+        data["names"][min_index] = data["names"][x]
+        data["names"][x] = temp
+        temp = data["images"][min_index]
+        data["images"][min_index] = data["images"][x]
+        data["images"][x] = temp
+    
+    data["prices"] = ["--" if price == 9999999999999999999 else price for price in data["prices"]]
+
+def sort_highest(data):
+    data["prices"] = [price if type(price) == int else -1 for price in data["prices"]]
+    for x in range(len(data["prices"])):
+        print(min_index)
+        min_index = data["prices"].index(max(data["prices"][x:]))
+        temp = data["prices"][min_index]
+        data["prices"][min_index] = data["prices"][x]
+        data["prices"][x] = temp
+        temp = data["names"][min_index]
+        data["names"][min_index] = data["names"][x]
+        data["names"][x] = temp
+        temp = data["images"][min_index]
+        data["images"][min_index] = data["images"][x]
+        data["images"][x] = temp
+    
+    data["prices"] = ["--" if price == -1 else price for price in data["prices"]]
