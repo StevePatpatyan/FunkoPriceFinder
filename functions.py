@@ -2,10 +2,13 @@ from requests_html import HTMLSession
 
 session = HTMLSession()
 
-def pop_data_finder(website, pop_class, price_class, name_class, image_class):
-    request = session.get(website)
+def pop_data_finder(websites, pop_class, price_class, name_class, image_class):
 
-    pops = request.html.find(pop_class)
+    pops = []
+
+    for website in websites:
+        request = session.get(website)
+        pops += request.html.find(pop_class)
 
     names = []
 

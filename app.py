@@ -7,17 +7,17 @@ from functions import pop_data_finder, filter_min, filter_max
 
 args = sys.argv[1:]
 
-options = ["help", "bb", "sx", "min", "max", "gf", "bcs"]
+options = ["help", "bb", "sx", "min", "max", "gf", "bcs", "pkmn"]
 
 web_options = {"sx": "Searches for funkos on StockX"}
 
 web_args = [arg for arg in args if arg in web_options]
 
-category_options = {"bb": "Searches for funkos of the emmy-winning Breaking Bad", "gf": "Searches for funkos of the legendary trilogy of The Godfather", "bcs": "Searches for funkos of the BB prequel Better Call Saul"}
+category_options = {"bb": "Searches for funkos of the emmy-winning Breaking Bad", "gf": "Searches for funkos of the legendary trilogy of The Godfather", "bcs": "Searches for funkos of the BB prequel Better Call Saul", "pkmn": "Searches for funkos of Pokemon"}
 
 category_args = [arg for arg in args if arg in category_options]
 
-full_names = {"sx": "StockX", "bb": "Breaking Bad", "gf": "The Godfather", "bcs": "Better Call Saul"}
+full_names = {"sx": "StockX", "bb": "Breaking Bad", "gf": "The Godfather", "bcs": "Better Call Saul", "pkmn": "Pokemon"}
 
 data_altering_options = {"min": "Finds funkos with lowest ask price in all given categories and websites", "max": "Finds funkos with highest ask price in all given categories and websites"}
 
@@ -25,8 +25,8 @@ data_altering_functions = {"min": filter_min, "max": filter_max}
 
 data_altering_args = {cmd: func for cmd, func in data_altering_functions.items() if cmd in args}
 
-#tuple: (website, pop html class, pop price html class, pop name html class, pop image html class)
-web_data = {"sx": {"bb": ("https://stockx.com/search?s=breaking+bad+funko", ".css-1yh5062", ".css-nsvdd9", ".css-3lpefb", ".css-tkc8ar"), "gf": ("https://stockx.com/search?s=godfather+funko", ".css-1yh5062", ".css-nsvdd9", ".css-3lpefb", ".css-tkc8ar"), "bcs": ("https://stockx.com/search?s=better+call+saul+funko", ".css-1yh5062", ".css-nsvdd9", ".css-3lpefb", ".css-tkc8ar")}}
+#tuple: (websites, pop html class, pop price html class, pop name html class, pop image html class)
+web_data = {"sx": {"bb": (["https://stockx.com/search?s=breaking+bad+funko"], ".css-1yh5062", ".css-nsvdd9", ".css-3lpefb", ".css-tkc8ar"), "gf": (["https://stockx.com/search?s=godfather+funko"], ".css-1yh5062", ".css-nsvdd9", ".css-3lpefb", ".css-tkc8ar"), "bcs": (["https://stockx.com/search?s=better+call+saul+funko"], ".css-1yh5062", ".css-nsvdd9", ".css-3lpefb", ".css-tkc8ar"), "pkmn": (["https://stockx.com/search?s=pokemon+funko&page=1", "https://stockx.com/search?s=pokemon+funko&page=2"], ".css-1yh5062", ".css-nsvdd9", ".css-3lpefb", ".css-tkc8ar")}}
 
 if len(args) == 0:
     raise exceptions.InputNotFound(Fore.RED + "No options selected...")
